@@ -149,5 +149,6 @@ Cardinality: 1 (User) to N (Message).
 Role: "receives".
 
 The Message entity has two distinct relationships with **User** (**sender** and **recipient**), which I’ll represent with separate labeled connections in the diagram.
+
 ![AirbnbClone ERD drawio](https://github.com/user-attachments/assets/bee8d83d-be8a-41d0-921b-f19c2e6566dc)
 
