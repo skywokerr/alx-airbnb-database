@@ -1,6 +1,6 @@
 ## Identify Entities and Attributes
-The database specification provides six entities, each with specific attributes and constraints. Below, I’ll list each entity and its attributes as they will appear in the ER diagram. In a standard ER diagram, we focus on the conceptual structure—entities, attributes, and relationships—while indicating primary keys (PK) and foreign keys (FK). Detailed constraints like NOT NULL or data types (e.g., VARCHAR, UUID) are typically omitted unless specified, so I’ll keep it simple and clear for Draw.io.
-User
+The database specification provides six entities, each with specific attributes and constraints. Below, I’ll list each entity and its attributes as they will appear in the ER diagram. In a standard ER diagram, we focus on the conceptual structure—entities, attributes, and relationships—while indicating primary keys (PK) and foreign keys (FK). Detailed constraints like NOT NULL or data types (e.g., VARCHAR, UUID) are typically omitted unless specified.
+**User**
 user_id (PK)
 
 first_name
@@ -17,7 +17,7 @@ role
 
 created_at
 
-Property
+**Property**
 property_id (PK)
 
 host_id (FK, references User(user_id))
@@ -34,7 +34,7 @@ created_at
 
 updated_at
 
-Booking
+**Booking**
 booking_id (PK)
 
 property_id (FK, references Property(property_id))
@@ -51,7 +51,7 @@ status
 
 created_at
 
-Payment
+**Payment**
 payment_id (PK)
 
 booking_id (FK, references Booking(booking_id))
@@ -62,7 +62,7 @@ payment_date
 
 payment_method
 
-Review
+**Review**
 review_id (PK)
 
 property_id (FK, references Property(property_id))
@@ -75,7 +75,7 @@ comment
 
 created_at
 
-Message
+**Message**
 message_id (PK)
 
 sender_id (FK, references User(user_id))
@@ -149,4 +149,5 @@ Cardinality: 1 (User) to N (Message).
 Role: "receives".
 
 The Message entity has two distinct relationships with **User** (**sender** and **recipient**), which I’ll represent with separate labeled connections in the diagram.
+![AirbnbClone ERD drawio](https://github.com/user-attachments/assets/bee8d83d-be8a-41d0-921b-f19c2e6566dc)
 
