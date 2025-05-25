@@ -1,26 +1,29 @@
 
 SELECT 
-  u.id AS user_id,
-  u.name AS user_name,
-  COUNT(b.id) AS total_bookings
-FROM users u
-LEFT JOIN bookings b ON u.id = b.user_id
-GROUP BY u.id, u.name
+    user_id, 
+    COUNT(*) as total_bookings
+FROM bookings
+GROUP BY user_id
 ORDER BY total_bookings DESC;
 
-WITH property_booking_stats AS (
-  SELECT 
-    p.id AS property_id,
-    p.name AS property_name,
-    COUNT(b.id) AS total_bookings
-  FROM properties p
-  LEFT JOIN bookings b ON p.id = b.property_id
-  GROUP BY p.id, p.name
-)
+
 SELECT 
-  property_id,
-  property_name,
-  total_bookings,
-  RANK() OVER (ORDER BY total_bookings DESC) AS booking_rank
-FROM property_booking_stats
+    p.property_id,
+    p.property_name,
+    COUNT(b.booking_id) as total_bookings,
+    RANK() OVER (ORDER BY COUNT(b.booking_id) DESC) as booking_rank
+FROM properties p
+LEFT JOIN bookings b ON p.property_id = b.property_id
+GROUP BY p.property_id, p.property_name
 ORDER BY booking_rank;
+
+
+SELECT 
+    p.property_id,
+    p.property_name,
+    COUNT(b.booking_id) as total_bookings,
+    ROW_NUMBER() OVER (ORDER BY COUNT(b.booking_id) DESC) as row_num
+FROM properties p
+LEFT JOIN bookings b ON p.property_id = b.property_id
+GROUP BY p.property_id, p.property_name
+ORDER BY total_bookings DESC;
